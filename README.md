@@ -47,15 +47,16 @@ It's very easy to configure, there are just a simple command to execute, once fo
 
 All is explained in volumouse --help and volumouse --info
 
-Open a terminal and type :
-- `volumouse --configure` or `volumouse -c`
+Open a terminal in the directory of volumouse.py and type :
+
+- `python3 'volumouse.py --configure'` in the imported folder or `python3 '/place/of/the/folder/volumouse/volumouse.py -c'`
 
 
 
 # Usage : 
 
 
-Just run the command `volumouse` at startup or in a terminal
+Just run the command `python3 'volumouse.py'` in the imported folder or `python3 '/place/of/the/folder/volumouse/volumouse.py'`
 
 
 
@@ -81,7 +82,7 @@ It will be restored on the next reboot.
 
 
 By doing this, instead of taping `python3 '/place/of/the/folder/volumouse/volumouse.py'`,
-you will be able to directly tape in the terminal : `volumouse`.
+you will be able to directly tape in the terminal : `volumouse`. Perhaps you should rename `volumouse.py` to `volumouse` for that.
 
 Enjoy !
 
