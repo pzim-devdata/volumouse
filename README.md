@@ -5,7 +5,7 @@ A Python 3 program that allows you to change the volume with the mouse wheel usi
     <img width="33%" src="https://www.evinco-software.com/eng/techImage/volumouse-mouse-volume-control.jpg"> 
 </p>
 
-[![GitHub license](https://img.shields.io/github/license/pzim-devdata/volumouse?style=plastic)](https://github.com/pzim-devdata/volumouse/blob/main/LICENSE)    ![](https://img.shields.io/badge/Works%20with-Python%203-red?style=plastic)    ![GitHub issues](https://img.shields.io/github/issues/pzim-devdata/volumouse?style=plastic)    [](https://github.com/pzim-devdata/volumouse/issues)    ![GitHub repo size](https://img.shields.io/github/repo-size/pzim-devdata/volumouse?style=plastic)    [![Visits Badge](https://badges.strrl.dev/visits/pzim-devdata/volumouse)](https://badges.strrl.dev)    ![GitHub release (latest by date)](https://img.shields.io/github/v/release/pzim-devdata/volumouse?style=plastic)    [![GitHub commits](https://img.shields.io/github/commits-since/pzim-devdata/volumouse/v2.2.0.svg?style=plastic)](https://GitHub.com/pzim-devata/tahoma/commit/)    
+[![GitHub license](https://img.shields.io/github/license/pzim-devdata/volumouse?style=plastic)](https://github.com/pzim-devdata/volumouse/blob/main/LICENSE)    ![](https://img.shields.io/badge/Works%20with-Python%203-red?style=plastic)    ![GitHub issues](https://img.shields.io/github/issues/pzim-devdata/volumouse?style=plastic)    [](https://github.com/pzim-devdata/volumouse/issues)    ![GitHub repo size](https://img.shields.io/github/repo-size/pzim-devdata/volumouse?style=plastic)    [![Visits Badge](https://badges.strrl.dev/visits/pzim-devdata/volumouse)](https://badges.strrl.dev)    ![GitHub release (latest by date)](https://img.shields.io/github/v/release/pzim-devdata/volumouse?style=plastic)    [![GitHub commits](https://img.shields.io/github/commits-since/pzim-devdata/volumouse/v2.2.0.svg?style=plastic)](https://GitHub.com/pzim-devata/volumouse/commit/)    
 [![Downloads](https://static.pepy.tech/personalized-badge/volumouse?period=total&units=international_system&left_color=grey&right_color=blue&left_text=PyPI%20downloads)](https://pepy.tech/project/volumouse)
 
 
@@ -38,7 +38,7 @@ Run in your imported folder :
 
 - `python3 -m pip install -r requirements.txt` in order to install dependencies
 and
-- `python3 volumouse.py` for being sure that tahoma starts
+- `python3 volumouse.py` for being sure that volumouse starts
 
 # Configure :
 
