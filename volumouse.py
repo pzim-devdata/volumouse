@@ -25,7 +25,7 @@ file_Screen_resolution = os.path.dirname(os.path.abspath(__file__))+'/temp/scree
 file_Corner_area = os.path.dirname(os.path.abspath(__file__))+'/temp/corner_area_size.txt'
 
 def main():
-    from volumouse import __version__
+    import __version__
     version ='volumouse - Version '+ str(__version__.__version__)+' - by @pzim-devdata'
 ############################ARGUMENTS
     def info():
