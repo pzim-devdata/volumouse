@@ -1,0 +1,531 @@
+#!/usr/bin/python3
+# volumouse.py by @pzim-devdata
+# MIT Licence
+# Inspired by script from mehmet nural altintas <mehmet.nrl@hotmail.com>
+# This script is inspired from  "record_demo.py -- demonstrate record extension" that can be found here: http://python-xlib.svn.sourceforge.net/viewvc/python-xlib/trunk/examples/
+
+"""
+This is the main module
+"""
+
+import subprocess
+import os
+import argparse
+import sys
+from Xlib import X, display
+from Xlib.ext import record
+from Xlib.protocol import rq
+
+file_temp =  os.path.dirname(os.path.abspath(__file__))+'/temp'
+file_Top_right_card = os.path.dirname(os.path.abspath(__file__))+'/temp/top_right_card.txt'
+file_Bottom_right_card = os.path.dirname(os.path.abspath(__file__))+'/temp/bottom_right_card.txt'
+file_Top_left_card = os.path.dirname(os.path.abspath(__file__))+'/temp/top_left_card.txt'
+file_Bottom_left_card = os.path.dirname(os.path.abspath(__file__))+'/temp/bottom_left_card.txt'
+file_Screen_resolution = os.path.dirname(os.path.abspath(__file__))+'/temp/screen_resolution.txt'
+file_Corner_area = os.path.dirname(os.path.abspath(__file__))+'/temp/corner_area_size.txt'
+
+def main():
+    from volumouse import __version__
+    version ='volumouse - Version '+ str(__version__.__version__)+' - by @pzim-devdata'
+############################ARGUMENTS
+    def info():
+        print( "" )
+        print( "      ***************************************************************      " )
+        print( "------*         "+version+"          *-------" )
+        print( "      ***************************************************************        " )
+        print( "                   sudo python3 -m pip install volumouse -U" )
+        print( " On the next version of Python and Linux you will need to install volumouse with pipx (using virtual env) :" )
+        print( "                             sudo apt install pipx" )
+        print( "                            pipx install volumouse" )
+        print( "                             To update volumouse : ")
+        print( "                            pipx upgrade volumouse" )
+        print( "" )
+        print( "                      https://pypi.org/project/volumouse/" )
+        print( "                    https://github.com/pzim-devdata/volumouse" )
+        print( "                             contact@pzim.fr" )
+        print( "" )
+        print( " HELP : volumouse -h or volumouse --help" )
+        print( "        volumouse -i or volumouse --info" )
+        print( "" )
+        print( " CONFIGURE : volumouse -c or volumouse --configure ")
+        print( "")
+        print( " RUNNING THE APP : volumouse")
+        print( "" )
+        print( " You should add volumouse to the starting apps to use it ")
+        print( "" )
+        print( " You need x11-utils :")
+        print( " Debian, Ubuntu, Kali Linux, Raspbian :")
+        print( " apt-get install x11-utils ")
+        print( " Arch Linux :pacman -S xorg-xdpyinfo")
+        print( " CentOS : yum install xorg-x11-utils")
+        print( " Fedora : dnf install xorg-x11-utils" )
+        print( "")
+        print( " You also need pulseaudio-utils :")
+        print( " Debian, Ubuntu, Kali Linux, Raspbian :")
+        print( " apt-get install pulseaudio-utils")
+        print( " Alpine : apk add pulseaudio-utils")
+        print( " Arch Linux : pacman -S libpulse")
+        print( " CentOS : yum install pulseaudio-utils")
+        print( " Fedora : dnf install pulseaudio-utils")
+
+    for arg in sys.argv :
+        if arg == '-h' or arg == '--help' :
+            print("volumouse -h, --help : "+version+"\n\nUsage:\n volumouse \n\nHelp options :\n -h,   --help                      Show this help\n -i,   --info                      Show more info\n\nPlugin options :\n -v,   --version                   Show the version of the plugin\n -c,   --configure                 To configure volumouse in text files which are located there : "+file_temp)
+            exit()
+
+        try :
+            if arg == '-v' or arg == '--version' :
+                print(version)
+                exit()
+        except IndexError: 
+            info()
+            exit()
+
+        try :
+            if arg == '-i' or arg == '--info' :
+                info()
+                exit()
+        except IndexError: 
+            info()
+            exit()
+
+        if arg == '-c' or arg == '--configure' or arg == '--config':
+            try:
+                screen_resolution = tuple(map(int, subprocess.check_output("xdpyinfo | awk '/dimensions/ {print $2}' | grep '[0-9]'", shell=True).decode().rstrip().replace('x',',').split(',')))
+                print("Do you want to use the default screen resolution which is : "+str(screen_resolution)+" ? (Y/n)")
+                answer = input()
+                if answer.lower() == 'y'or answer.lower() == 'yes':
+                    f = open(file_Screen_resolution, 'w')
+                    f.write(str(screen_resolution))
+                    f.close()
+                    print( "Resolution stored in "+file_Screen_resolution ) 
+                elif answer.lower() == 'n'or answer.lower() == 'no':
+                    print ("\nEnter the number in the list of your screen résolution :")
+                    print("1- 800 x 600")
+                    print("2- 823 x 624")
+                    print("3- 1024 x 768") 
+                    print("4- 1280 x 720")
+                    print("5- 1152 x 864")
+                    print("6- 1280 x 800")
+                    print("7- 1440 x 900")
+                    print("8- 1280 x 1024")
+                    print("9- 1600 x 900")
+                    print("10- 1680 x 1050")
+                    print("11- 1920 x 1080")
+                    print("12- 2560 x 1440")
+                    print("13- 3840 x 2160")
+                    print("14- 4096 x 2160")
+                    print("15- CUSTOM Resolution")
+                    answer = input()
+                    if int(answer) == 1:
+                        f = open(file_Screen_resolution, 'w')
+                        f.write('(800, 600)')
+                        f.close()
+                        print( "Resolution stored in "+file_Screen_resolution ) 
+                    elif int(answer) == 2:
+                        f = open(file_Screen_resolution, 'w')
+                        f.write('(823, 624)')
+                        f.close()
+                        print( "Resolution stored in "+file_Screen_resolution ) 
+                    elif int(answer) == 3:
+                        f = open(file_Screen_resolution, 'w')
+                        f.write('(1024, 768)')
+                        f.close()
+                        print( "Resolution stored in "+file_Screen_resolution ) 
+                    elif int(answer) == 4:
+                        f = open(file_Screen_resolution, 'w')
+                        f.write('(1280, 720)')
+                        f.close()
+                        print( "Resolution stored in "+file_Screen_resolution ) 
+                    elif int(answer) == 5:
+                        f = open(file_Screen_resolution, 'w')
+                        f.write('(1152, 864)')
+                        f.close()
+                        print( "Resolution stored in "+file_Screen_resolution ) 
+                    elif int(answer) == 6:
+                        f = open(file_Screen_resolution, 'w')
+                        f.write('(1280, 800)')
+                        f.close()
+                        print( "Resolution stored in "+file_Screen_resolution ) 
+                    elif int(answer) == 7:
+                        f = open(file_Screen_resolution, 'w')
+                        f.write('(1440, 900)')
+                        f.close()
+                        print( "Resolution stored in "+file_Screen_resolution ) 
+                    elif int(answer) == 8:
+                        f = open(file_Screen_resolution, 'w')
+                        f.write('(1280, 1024)')
+                        f.close()
+                        print( "Resolution stored in "+file_Screen_resolution ) 
+                    elif int(answer) == 9:
+                        f = open(file_Screen_resolution, 'w')
+                        f.write('(1600, 900)')
+                        f.close()
+                        print( "Resolution stored in "+file_Screen_resolution ) 
+                    elif int(answer) == 10:
+                        f = open(file_Screen_resolution, 'w')
+                        f.write('(1680, 1050)')
+                        f.close()
+                        print( "Resolution stored in "+file_Screen_resolution ) 
+                    elif int(answer) == 11:
+                        f = open(file_Screen_resolution, 'w')
+                        f.write('(1920, 1080)')
+                        f.close()
+                        print( "Resolution stored in "+file_Screen_resolution ) 
+                    elif int(answer) == 12:
+                        f = open(file_Screen_resolution, 'w')
+                        f.write('(2560, 1440)')
+                        f.close()
+                        print( "Resolution stored in "+file_Screen_resolution ) 
+                    elif int(answer) == 13:
+                        f = open(file_Screen_resolution, 'w')
+                        f.write('(3840, 2160)')
+                        f.close()
+                        print( "Resolution stored in "+file_Screen_resolution ) 
+                    elif int(answer) == 14:
+                        f = open(file_Screen_resolution, 'w')
+                        f.write('(4096, 2160)')
+                        f.close()
+                        print( "Resolution stored in "+file_Screen_resolution ) 
+                    elif int(answer) == 15 or answer.lower() == custom :
+                        f = open(file_Screen_resolution, 'w')
+                        print("Please provide your custom resolution : '(x, y)'")
+                        print("What is the value of x ?")
+                        answer = input()
+                        print("What is the value of y ?")
+                        answer2 = input()
+                        f.write('('+answer+', '+answer2+')')
+                        f.close()
+                        print( "Resolution stored in "+file_Screen_resolution ) 
+                    else :
+                        print("You didn't provided a screen resolution ! Volumouse can't work without this info ...")
+                        exit(1)
+                else :
+                    f = open(file_Screen_resolution, 'w')
+                    f.write(str(screen_resolution))
+                    f.close()
+                    print("You didn't provided any answer, "+str(screen_resolution)+" will be used")
+                    print( "Resolution stored in "+file_Screen_resolution ) 
+            except Exception as e:
+                print( "\nAn error occured, please, try again the command 'volumouse -c'.\n")
+                print(e)
+                exit(1)
+            #############################################
+            try :
+                corner_area = 30 
+                print("\nPlease provide a size for the area's detection in the corners :")
+                print("Default size is 30")
+                answer3 = input()
+                try:
+                    if 1 <= int(answer3) and int(answer3) <= 200 :
+                        f = open(file_Corner_area, 'w')
+                        f.write(answer3)
+                        f.close()
+                        print("You have entered : "+answer3)
+                        print( "Corner's size stored in "+file_Corner_area ) 
+                except :
+                    print("You didn't provided any correct value, '"+str(corner_area)+"' will be used for the default size of the corner area")
+                    f = open(file_Corner_area, 'w')
+                    f.write(str(corner_area))
+                    f.close()
+            except Exception as e:
+                print( "\nAn error occured, please, try again the command 'volumouse -c'.\n")
+                print(e)
+                exit(1)
+            #############################################
+            try :
+                list_cards = subprocess.check_output("pacmd list-sinks | grep 'name:' | cut -d '<' -f2 | cut -d '>' -f1", shell=True).decode().rstrip().replace('\n',',').split(",")
+            except Exception as e:
+                print( "\nAn error occured, please, try again the command 'volumouse -c'.\n")
+                print(e)
+                exit(1)
+            ####################
+            try:
+                print("\nPlease enter the number of the card you want to use for the 'Top Right' corner's side of the screen :")
+                print("0- No Soundcard")
+                print("1- Active soundcard")
+                y=2
+                for card in list_cards :
+                    print (str(y)+'- '+card)
+                    y=y+1
+                print('')
+                answer = input()
+                top_right_card = list_cards[int(answer)-2]
+                f = open(file_Top_right_card, 'w')
+                if int(answer) == 0 :
+                    print("\nYou don't have selected any card") 
+                    f.write('')
+                elif int(answer) == 1 :
+                    print("\nYou have selected the default used card") 
+                    f.write('@DEFAULT_SINK@')
+                elif int(answer) >= 2 :
+                    print("\nYou have selected : "+top_right_card) 
+                    f.write(top_right_card)
+                else:
+                    print("\nYou didn't provided a card for the 'Top Right' corner's side of the screen.\nNo sound card will be assigned")
+                    f.write('')
+                f.close()
+            ####################
+                print("\nPlease enter the number of the card you want to use for the 'Bottom Right' corner's side of the screen :")
+                print("0- No Soundcard")
+                print("1- Active soundcard")
+                y=2
+                for card in list_cards :
+                    print (str(y)+'- '+card)
+                    y=y+1
+                print(' ')
+                answer = input()
+                bottom_right_card = list_cards[int(answer)-2]
+                f = open(file_Bottom_right_card, 'w')
+                if int(answer) == 0 :
+                    print("\nYou don't have selected any card") 
+                    f.write('')
+                elif int(answer) == 1 :
+                    print("\n\nYou have selected the default used card") 
+                    f.write('@DEFAULT_SINK@')
+                elif int(answer) >= 2 :
+                    print("\nYou have selected : "+bottom_right_card) 
+                    f.write(bottom_right_card)
+                else:
+                    print("\nYou didn't provided a card for the 'Bottom Right' corner's side of the screen.\nNo card will be assigned")
+                    f.write('')
+                f.close()
+            ####################
+                print("\nPlease enter the number of the card you want to use for the 'Top Left' corner's side of the screen :")
+                print("0- No Soundcard")
+                print("1- Active soundcard")
+                y=2
+                for card in list_cards :
+                    print (str(y)+'- '+card)
+                    y=y+1
+                print('')
+                answer = input()
+                top_left_card = list_cards[int(answer)-2]
+                f = open(file_Top_left_card, 'w')
+                if int(answer) == 0 :
+                    print("\nYou don't have selected any card") 
+                    f.write('')
+                elif int(answer) == 1 :
+                    print("\nYou have selected the default used card") 
+                    f.write('@DEFAULT_SINK@')
+                elif int(answer) >= 2 :
+                    print("\n\nYou have selected : "+top_left_card) 
+                    f.write(top_left_card)
+                else:
+                    print("\nYou didn't provided a card for the 'Top Left' corner's side of the screen.\nNo card will be assigned")
+                    f.write('')
+                f.close()
+            ####################
+                print("\nPlease enter the number of the card you want to use for the 'Bottom Left' corner's side of the screen :")
+                print("0- No Soundcard")
+                print("1- Active soundcard")
+                y=2
+                for card in list_cards :
+                    print (str(y)+'- '+card)
+                    y=y+1
+                print('')
+                answer = input()
+                bottom_left_card = list_cards[int(answer)-2]
+                f = open(file_Bottom_left_card, 'w')
+                if int(answer) == 0 :
+                    print("\nYou don't have selected any card") 
+                    f.write('')
+                elif int(answer) == 1 :
+                    print("\nYou have selected the default used card") 
+                    f.write('@DEFAULT_SINK@')
+                elif int(answer) >= 2 :
+                    print("\n\nYou have selected : "+bottom_left_card) 
+                    f.write(bottom_left_card)
+                else:
+                    print("\nYou didn't provided a card for the 'Bottom Left' corner's side of the screen.\nNo card will be assigned")
+                    f.write('')
+                f.close()
+            except Exception as e:
+                print( "\nAn error occured, please, try again the command 'volumouse -c'.")
+                print(e)
+                exit(1)
+            exit(0)
+
+############################FUNCTION
+    print(version)
+    info()
+    try :
+        f = open(file_Top_right_card, 'r')
+        Top_right_card = f.read()
+        f.close()
+    except : pass
+
+    try :
+        f = open(file_Bottom_right_card, 'r')
+        Bottom_right_card = f.read()
+        f.close()
+    except : pass
+
+    try :
+        f = open(file_Top_left_card, 'r')
+        Top_left_card = f.read()
+        f.close()
+    except : pass
+
+    try :
+        f = open(file_Bottom_left_card, 'r')
+        Bottom_left_card = f.read()
+        f.close()
+    except : pass
+
+    try :
+        f = open(file_Corner_area, 'r')
+        Corner_area = int(f.read())
+        f.close()
+    except :
+        Corner_area = 30
+
+    try :
+        f = open(file_Screen_resolution, 'r')
+        Screen_resolution = tuple(map(f.read()))
+        f.close()
+    except :
+        Screen_resolution = (1920,1080)
+
+        def volume_up_top_right():
+            subprocess.run("pactl set-sink-volume "+Top_right_card+" +5% & pid=$!",shell=True)
+            #######"IT COULD ALSO BE FOR EXEMPLE:
+            #subprocess.run("pactl set-sink-volume alsa_output.pci-0000_01_00.1.hdmi-stereo-extra3 +5% & pid=$!",shell=True)
+            #subprocess.run("pactl set-sink-volume @DEFAULT_SINK@ +5% & pid=$!",shell=True)
+            #subprocess.run("amixer set Master 5%+ & pid=$!",shell=True)
+            #subprocess.run("pactl set-sink-volume 4 +5% & pid=$!",shell=True)
+            #subprocess.run("pacmd set-sink-volume 1 10 & pid=$!",shell=True)
+            #subprocess.run("amixer -q sset Master 3%+ & pid=$!",shell=True)
+
+            # use "& pid=$!" end of your command to prevent freezing python script if your command takes long time to process.
+        def volume_down_top_right():
+            subprocess.run("pactl set-sink-volume "+Top_right_card+" -5% & pid=$!",shell=True)
+
+        def volume_up_bottom_right():
+            subprocess.run("pactl set-sink-volume "+Bottom_right_card+" +5% & pid=$!",shell=True)
+        def volume_down_bottom_right():
+            subprocess.run("pactl set-sink-volume "+Bottom_right_card+" -5% & pid=$!",shell=True)
+
+        def volume_up_top_left():
+            subprocess.run("pactl set-sink-volume "+Top_left_card+" +5% & pid=$!",shell=True)    
+        def volume_down_top_left():
+            subprocess.run("pactl set-sink-volume "+Top_left_card+" -5% & pid=$!",shell=True)
+
+        def volume_up_bottom_left():
+            subprocess.run("pactl set-sink-volume "+Bottom_left_card+" +5% & pid=$!",shell=True)    
+        def volume_down_bottom_left():
+            subprocess.run("pactl set-sink-volume "+Bottom_left_card+" -5% & pid=$!",shell=True)
+
+        try :
+            record_dpy = display.Display()
+
+            ctx = record_dpy.record_create_context(
+                    0,
+                    [record.AllClients],
+                    [{
+                            'core_requests': (0, 0),
+                            'core_replies': (0, 0),
+                            'ext_requests': (0, 0, 0, 0),
+                            'ext_replies': (0, 0, 0, 0),
+                            'delivered_events': (0, 0),
+                            'device_events': (X.KeyPress, X.MotionNotify),
+                            'errors': (0, 0),
+                            'client_started': False,
+                            'client_died': False,
+                    }])
+
+            def record_callback(reply):
+
+                data = reply.data
+                while len(data):
+                    event, data = rq.EventField(None).parse_binary_value(data, record_dpy.display, None, None)
+                    
+                    if event.type == X.ButtonPress:
+                        print (event.detail, event.root_x, event.root_y)
+
+                        # Let's set up right up corner 
+
+                        if all( [event.root_x > Screen_resolution [0] - Corner_area, event.root_y < Corner_area] ):
+
+                           print ("right up corner detected") 
+
+                           # event.detail 4 means wheel up event
+
+                           if event.detail == 4 : 
+                              print ("volume up!")
+                              volume_up_top_right() 
+
+                           # event.detail 5 means wheel down event
+
+                           if event.detail == 5 :
+                              print ("volume down!")
+                              volume_down_top_right()
+
+                        # Let's set up left up corner
+
+                        if all( [event.root_x < Corner_area , event.root_y < Corner_area] ):
+
+                           print ("left up corner detected")
+
+                           if event.detail == 4 :
+                              print ("volume up!")
+                              volume_up_top_left()
+
+                           if event.detail == 5 :
+                              print ("volume down!")
+                              volume_down_top_left() 
+              
+                        # Let's set up right down corner
+
+                        if all( [event.root_x > Screen_resolution[0] - Corner_area, event.root_y > Screen_resolution[1] - Corner_area] ):
+
+                           print ("right down corner detected")
+
+                           if event.detail == 4 :
+                              print ("volume up!")
+                              volume_up_bottom_right() 
+
+                           if event.detail == 5 :
+                              print ("volume down!")
+                              volume_down_bottom_right() 
+
+                        # Let's set up left down corner 
+
+                        if all( [event.root_x < Corner_area , event.root_y > Screen_resolution[1] - Corner_area] ):
+
+                           print ("left down corner detected")
+
+                           if event.detail == 4 :
+                              print ("volume up!") 
+                              volume_up_bottom_left() 
+
+                           if event.detail == 5 :
+                              print ("volume down!") 
+                              volume_down_bottom_left() 
+                                               
+                        
+                    elif event.type == X.ButtonRelease:
+
+                        print  (event.detail, event.root_x, event.root_y)
+                        
+                    elif event.type == X.MotionNotify:
+
+                        print (event.root_x, event.root_y)
+                        
+
+            record_dpy.record_enable_context(ctx, record_callback)
+        except Exception as error:
+            print(error)
+            exit(1)
+
+
+
+if __name__ == "__main__":
+    # Catch all untrapped exceptions
+    try:
+        main()
+        exit(0)
+    except Exception as error:
+        print(error)
+        exit(1)
+
