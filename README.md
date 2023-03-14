@@ -90,7 +90,7 @@ Enjoy !
 IF YOU WANT TO INSTALL THE PACKAGE USE PyPi (pip version) :
 
 # Install the main package :
-[PyPi Project Website](https://pypi.org/project/tahoma/#description)
+[PyPi Project Website](https://pypi.org/project/volumouse/#description)
 
 1. Install dependancies :
 
