@@ -67,6 +67,9 @@ def main():
         print( " Arch Linux : pacman -S libpulse")
         print( " CentOS : yum install pulseaudio-utils")
         print( " Fedora : dnf install pulseaudio-utils")
+        print( "")
+        print("If you want to start volumouse at startup, enter this command as app's directory :")
+        print("python3 '"+os.path.dirname(os.path.abspath(__file__))+"/volumouse.py'")
 
     for arg in sys.argv :
         if arg == '-h' or arg == '--help' :
@@ -340,6 +343,9 @@ def main():
                     print("\nYou didn't provided a card for the 'Bottom Left' corner's side of the screen.\nNo card will be assigned")
                     f.write('')
                 f.close()
+                print("\nConfiguration completed, now you can run the command 'volumouse'")
+                print("If you want to start volumouse at startup, enter this command as app's directory :")
+                print("python3 '"+os.path.dirname(os.path.abspath(__file__))+"/volumouse.py'")
             except Exception as e:
                 print( "\nAn error occured, please, try again the command 'volumouse -c'.")
                 print(e)
