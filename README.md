@@ -15,9 +15,9 @@ THIS IS THE PORTABLE VERSION FOR DIRECT DOWNLOADING. IT'S NOT AN INSTALLED PACKA
 
 ![GifVolumouse.gif](GifVolumouse.gif)
 
-# Download the folder and extract it : [Download :inbox_tray:](https://github.com/pzim-devdata/volumouse/releases/download/v0.0.1/volumouse.zip)
+# Download the folder and extract it : 
 
-https://github.com/pzim-devdata/volumouse/archive/refs/heads/main.zip
+[Download :inbox_tray:](https://github.com/pzim-devdata/volumouse/releases/download/v0.0.1/volumouse.zip)
 
 # Install dependancies :
 
