@@ -1,9 +1,6 @@
 # volumouse
 A Python 3 program that allows you to change the volume with the mouse wheel using it at the four corners of the screen
 
-<p align="center" width="100%">
-    <img width="33%" src="https://www.evinco-software.com/eng/techImage/volumouse-mouse-volume-control.jpg"> 
-</p>
 
 [![GitHub license](https://img.shields.io/github/license/pzim-devdata/volumouse?style=plastic)](https://github.com/pzim-devdata/volumouse/blob/main/LICENSE)    ![](https://img.shields.io/badge/Works%20with-Python%203-red?style=plastic)    ![GitHub issues](https://img.shields.io/github/issues/pzim-devdata/volumouse?style=plastic)    [](https://github.com/pzim-devdata/volumouse/issues)    ![GitHub repo size](https://img.shields.io/github/repo-size/pzim-devdata/volumouse?style=plastic)    [![Visits Badge](https://badges.strrl.dev/visits/pzim-devdata/volumouse)](https://badges.strrl.dev)    ![GitHub release (latest by date)](https://img.shields.io/github/v/release/pzim-devdata/volumouse?style=plastic)    [![GitHub commits](https://img.shields.io/github/commits-since/pzim-devdata/volumouse/v0.0.1.svg?style=plastic)](https://GitHub.com/pzim-devata/volumouse/commit/)    
 [![Downloads](https://static.pepy.tech/personalized-badge/volumouse?period=total&units=international_system&left_color=grey&right_color=blue&left_text=PyPI%20downloads)](https://pepy.tech/project/volumouse)
@@ -198,7 +195,9 @@ you will be able to directly tape in the terminal : `volumouse`.
 
 
 
-
+<p align="center" width="100%">
+    <img width="33%" src="https://www.evinco-software.com/eng/techImage/volumouse-mouse-volume-control.jpg"> 
+</p>
 
 
 
