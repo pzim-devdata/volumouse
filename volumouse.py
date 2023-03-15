@@ -34,23 +34,16 @@ def main():
         print( "      ***************************************************************      " )
         print( "------*         "+version+"          *-------" )
         print( "      ***************************************************************        " )
-        print( "                   sudo python3 -m pip install volumouse -U" )
-        print( " On the next version of Python and Linux you will need to install volumouse with pipx (using virtual env) :" )
-        print( "                             sudo apt install pipx" )
-        print( "                            pipx install volumouse" )
-        print( "                             To update volumouse : ")
-        print( "                            pipx upgrade volumouse" )
         print( "" )
-        print( "                      https://pypi.org/project/volumouse/" )
         print( "                    https://github.com/pzim-devdata/volumouse" )
         print( "                             contact@pzim.fr" )
         print( "" )
-        print( " HELP : volumouse -h or volumouse --help" )
-        print( "        volumouse -i or volumouse --info" )
+        print( " HELP : python3 'volumouse.py' -h or python3 'volumouse.py' --help" )
+        print( "        python3 'volumouse.py' -i or python3 'volumouse.py' --info" )
         print( "" )
-        print( " CONFIGURE : volumouse -c or volumouse --configure ")
+        print( " CONFIGURE : python3 'volumouse.py' -c or python3 'volumouse.py' --configure ")
         print( "")
-        print( " RUNNING THE APP : volumouse")
+        print( " RUNNING THE APP : python3 'volumouse.py'")
         print( "" )
         print( " You should add volumouse to the starting apps to use it ")
         print( "" )
@@ -74,7 +67,11 @@ def main():
 
     for arg in sys.argv :
         if arg == '-h' or arg == '--help' :
-            print("volumouse -h, --help : "+version+"\n\nUsage:\n volumouse \n\nHelp options :\n -h,   --help                      Show this help\n -i,   --info                      Show more info\n\nPlugin options :\n -v,   --version                   Show the version of the plugin\n -c,   --configure                 To configure volumouse in text files which are located there : "+file_temp)
+            print("\n\npython3 'volumouse.py' -h, --help : "+version+"\n\nUsage:\n python3 'volumouse.py' \n\nHelp options :\n -h,   --help                      Show this help\n -i,   --info                      Show more info\n\nPlugin options :\n -v,   --version                   Show the version of the plugin\n -c,   --configure                 To configure volumouse in text files which are located there : \n                                   "+file_temp)
+            print( "")
+            print("If you want to start volumouse at startup, enter this command as app's directory :")
+            print("python3 '"+os.path.dirname(os.path.abspath(__file__))+"/volumouse.py'")
+            print("")
             exit()
 
         try :
@@ -256,6 +253,13 @@ def main():
                         print("You have entered : "+answer3)
                         print( "Corner's size stored in "+file_Corner_area ) 
                         time.sleep(2)
+                    else :
+                        print("You have entered :"+answer3+" which is incorrect.")
+                        print("The default value '"+str(corner_area)+"' will be used instead ...")
+                        time.sleep (4)
+                        f = open(file_Corner_area, 'w')
+                        f.write(str(corner_area))
+                        f.close()
                 except :
                     print("You didn't provided any correct value, '"+str(corner_area)+"' will be used for the default size of the corner area")
                     f = open(file_Corner_area, 'w')
@@ -407,7 +411,7 @@ def main():
                 print("python3 '"+os.path.dirname(os.path.abspath(__file__))+"/volumouse.py'")
                 time.sleep(5)
             #############################################
-            print("\nConfiguration completed, you can now run the command 'volumouse.py'")
+            print("\nConfiguration completed, you can now run the command : python3 'volumouse.py'")
             print("Press any key to quit")
             answer = input()
             exit(0)
@@ -583,7 +587,10 @@ def main():
 
         record_dpy.record_enable_context(ctx, record_callback)
     except Exception as error:
+        print( "An error occured. Here is the error message bellow :\n" )
         print(error)
+        print( "\nDid you configure volumouse ?")
+        print( "Execute : python3 '"+os.path.dirname(os.path.abspath(__file__))+"/volumouse.py' -c")
         exit(1)
 
 
