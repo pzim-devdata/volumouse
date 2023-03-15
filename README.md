@@ -94,7 +94,7 @@ Enjoy !
 
 
 <p align="center" width="100%">
-    <img width="33%" src="https://www.evinco-software.com/eng/techImage/volumouse-mouse-volume-control.jpg"> 
+    <img width="33%" src="https://github.com/pzim-devdata/volumouse/blob/main/icons/volumouse.png"> 
 </p>
 
 
