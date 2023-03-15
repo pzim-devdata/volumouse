@@ -1,0 +1,4 @@
+#!/bin/bash
+
+gnome-terminal -- $(dirname "$0")/volumouse.py --config &
+
