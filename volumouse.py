@@ -15,6 +15,7 @@ import sys
 from Xlib import X, display
 from Xlib.ext import record
 from Xlib.protocol import rq
+import time
 
 file_temp =  os.path.dirname(os.path.abspath(__file__))+'/temp'
 file_Top_right_card = os.path.dirname(os.path.abspath(__file__))+'/temp/top_right_card.txt'
@@ -102,6 +103,7 @@ def main():
                     f.write(str(screen_resolution))
                     f.close()
                     print( "Resolution stored in "+file_Screen_resolution ) 
+                    time.sleep(2)
                 elif answer.lower() == 'n'or answer.lower() == 'no':
                     print ("\nEnter the number in the list of your screen résolution :")
                     print("1- 800 x 600")
@@ -125,71 +127,85 @@ def main():
                         f.write('(800, 600)')
                         f.close()
                         print( "Resolution stored in "+file_Screen_resolution ) 
+                        time.sleep(2)
                     elif int(answer) == 2:
                         f = open(file_Screen_resolution, 'w')
                         f.write('(823, 624)')
                         f.close()
                         print( "Resolution stored in "+file_Screen_resolution ) 
+                        time.sleep(2)
                     elif int(answer) == 3:
                         f = open(file_Screen_resolution, 'w')
                         f.write('(1024, 768)')
                         f.close()
                         print( "Resolution stored in "+file_Screen_resolution ) 
+                        time.sleep(2)
                     elif int(answer) == 4:
                         f = open(file_Screen_resolution, 'w')
                         f.write('(1280, 720)')
                         f.close()
                         print( "Resolution stored in "+file_Screen_resolution ) 
+                        time.sleep(2)
                     elif int(answer) == 5:
                         f = open(file_Screen_resolution, 'w')
                         f.write('(1152, 864)')
                         f.close()
                         print( "Resolution stored in "+file_Screen_resolution ) 
+                        time.sleep(2)
                     elif int(answer) == 6:
                         f = open(file_Screen_resolution, 'w')
                         f.write('(1280, 800)')
                         f.close()
                         print( "Resolution stored in "+file_Screen_resolution ) 
+                        time.sleep(2)
                     elif int(answer) == 7:
                         f = open(file_Screen_resolution, 'w')
                         f.write('(1440, 900)')
                         f.close()
                         print( "Resolution stored in "+file_Screen_resolution ) 
+                        time.sleep(2)
                     elif int(answer) == 8:
                         f = open(file_Screen_resolution, 'w')
                         f.write('(1280, 1024)')
                         f.close()
-                        print( "Resolution stored in "+file_Screen_resolution ) 
+                        print( "Resolution stored in "+file_Screen_resolution )
+                        time.sleep(2) 
                     elif int(answer) == 9:
                         f = open(file_Screen_resolution, 'w')
                         f.write('(1600, 900)')
                         f.close()
                         print( "Resolution stored in "+file_Screen_resolution ) 
+                        time.sleep(2)
                     elif int(answer) == 10:
                         f = open(file_Screen_resolution, 'w')
                         f.write('(1680, 1050)')
                         f.close()
                         print( "Resolution stored in "+file_Screen_resolution ) 
+                        time.sleep(2)
                     elif int(answer) == 11:
                         f = open(file_Screen_resolution, 'w')
                         f.write('(1920, 1080)')
                         f.close()
-                        print( "Resolution stored in "+file_Screen_resolution ) 
+                        print( "Resolution stored in "+file_Screen_resolution )
+                        time.sleep(2) 
                     elif int(answer) == 12:
                         f = open(file_Screen_resolution, 'w')
                         f.write('(2560, 1440)')
                         f.close()
                         print( "Resolution stored in "+file_Screen_resolution ) 
+                        time.sleep(2)
                     elif int(answer) == 13:
                         f = open(file_Screen_resolution, 'w')
                         f.write('(3840, 2160)')
                         f.close()
                         print( "Resolution stored in "+file_Screen_resolution ) 
+                        time.sleep(2)
                     elif int(answer) == 14:
                         f = open(file_Screen_resolution, 'w')
                         f.write('(4096, 2160)')
                         f.close()
                         print( "Resolution stored in "+file_Screen_resolution ) 
+                        time.sleep(2)
                     elif int(answer) == 15 or answer.lower() == custom :
                         f = open(file_Screen_resolution, 'w')
                         print("Please provide your custom resolution : '(x, y)'")
@@ -200,6 +216,7 @@ def main():
                         f.write('('+answer+', '+answer2+')')
                         f.close()
                         print( "Resolution stored in "+file_Screen_resolution ) 
+                        time.sleep(2)
                     else :
                         print("You didn't provided a screen resolution ! Volumouse can't work without this info ...")
                         exit(1)
@@ -209,10 +226,22 @@ def main():
                     f.close()
                     print("You didn't provided any answer, "+str(screen_resolution)+" will be used")
                     print( "Resolution stored in "+file_Screen_resolution ) 
+                    time.sleep(5)
             except Exception as e:
-                print( "\nAn error occured, please, try again the command 'volumouse -c'.\n")
+                f = open(file_Screen_resolution, 'w')
+                print("\nPlease provide your screen resolution :'(x, y)'\nFor instance (1920 x 1080) :")
+                print("What is the value of x ?")
+                answer = input()
+                print("What is the value of y ?")
+                answer2 = input()
+                f.write('('+answer+', '+answer2+')')
+                f.close()
+                print( "Resolution stored in "+file_Screen_resolution ) 
+                time.sleep(2)
+                print( "\nAn error occured, please, look at the error bellow :\n")
                 print(e)
-                exit(1)
+                print("Press any key to continue ...")
+                answer = input()
             #############################################
             try :
                 corner_area = 30 
@@ -226,11 +255,13 @@ def main():
                         f.close()
                         print("You have entered : "+answer3)
                         print( "Corner's size stored in "+file_Corner_area ) 
+                        time.sleep(2)
                 except :
                     print("You didn't provided any correct value, '"+str(corner_area)+"' will be used for the default size of the corner area")
                     f = open(file_Corner_area, 'w')
                     f.write(str(corner_area))
                     f.close()
+                    time.sleep(2)
             except Exception as e:
                 print( "\nAn error occured, please, try again the command 'volumouse -c'.\n")
                 print(e)
@@ -239,7 +270,7 @@ def main():
             try :
                 list_cards = subprocess.check_output("pacmd list-sinks | grep 'name:' | cut -d '<' -f2 | cut -d '>' -f1", shell=True).decode().rstrip().replace('\n',',').split(",")
             except Exception as e:
-                print( "\nAn error occured, please, try again the command 'volumouse -c'.\n")
+                print( "\nAn error occured, look at the error message bellow :\n")
                 print(e)
                 exit(1)
             ####################
@@ -268,6 +299,7 @@ def main():
                     print("\nYou didn't provided a card for the 'Top Right' corner's side of the screen.\nNo sound card will be assigned")
                     f.write('')
                 f.close()
+                time.sleep(2)
             ####################
                 print("\nPlease enter the number of the card you want to use for the 'Bottom Right' corner's side of the screen :")
                 print("0- No Soundcard")
@@ -293,6 +325,7 @@ def main():
                     print("\nYou didn't provided a card for the 'Bottom Right' corner's side of the screen.\nNo card will be assigned")
                     f.write('')
                 f.close()
+                time.sleep(2)
             ####################
                 print("\nPlease enter the number of the card you want to use for the 'Top Left' corner's side of the screen :")
                 print("0- No Soundcard")
@@ -318,6 +351,7 @@ def main():
                     print("\nYou didn't provided a card for the 'Top Left' corner's side of the screen.\nNo card will be assigned")
                     f.write('')
                 f.close()
+                time.sleep(2)
             ####################
                 print("\nPlease enter the number of the card you want to use for the 'Bottom Left' corner's side of the screen :")
                 print("0- No Soundcard")
@@ -343,13 +377,39 @@ def main():
                     print("\nYou didn't provided a card for the 'Bottom Left' corner's side of the screen.\nNo card will be assigned")
                     f.write('')
                 f.close()
-                print("\nConfiguration completed, now you can run the command 'volumouse'")
-                print("If you want to start volumouse at startup, enter this command as app's directory :")
-                print("python3 '"+os.path.dirname(os.path.abspath(__file__))+"/volumouse.py'")
+                time.sleep(2)
             except Exception as e:
-                print( "\nAn error occured, please, try again the command 'volumouse -c'.")
+                print( "\nAn error occured, look at the error message bellow :\n")
                 print(e)
                 exit(1)
+            #############################################
+            try:
+                print("\nDo you want to create an autostart entry for volumouse ? (Y/n)\n(Volumouse will automatically start when the computer start)\nIf not, volumouse autostart entry will be removed ...")
+                answer = input()
+                if answer.lower() == 'yes' or answer.lower() == 'y' :
+                    f = open(os.path.expanduser('~')+"/.config/autostart/volumouse.desktop", "w")
+                    f.write("[Desktop Entry]\nName=Volumouse\nGenericName=Controle the volume with the mouse wheel\nExec=python3 '"+os.path.dirname(os.path.abspath(__file__))+"/volumouse.py'\nTryExec=python3 '"+os.path.dirname(os.path.abspath(__file__))+"/volumouse.py'\nIcon="+os.path.dirname(os.path.abspath(__file__))+"/icons/volumouse.png\nStartupWMClass=volumouse\nStartupNotify=true\nTerminal=false\nType=Application\nVersion="+ str(__version__.__version__)+"\nCategories==AudioVideo;Audio;Utility\nMimeType=application/x-volumouse;\nX-GNOME-Autostart-enabled=true\nX-GNOME-Autostart-Delay=3\nX-KDE-autostart-after=panel\nX-LXQt-Need-Tray=true")
+                    f.close()
+                    print("An autostart entry has been created, reboot the computer and volumouse will start automatically ;-)\n")
+                    time.sleep(3)
+                else :
+                    print("\n\nNo autostart entry will be add for volumouse !")
+                    print("\nIf an autostart entry was previously created, it will be deleted ...")
+                    os.system("rm "+os.path.expanduser('~')+"/.config/autostart/volumouse.desktop")
+                    print("\nIf you want to start volumouse at startup, enter this command as app's directory :")
+                    print("python3 '"+os.path.dirname(os.path.abspath(__file__))+"/volumouse.py'")
+                    time.sleep(5)
+            except Exception as e:
+                print( "\nAn error occured, please, look at the error message bellow :\n")
+                print(e)
+                time.sleep(3)
+                print("\nIf you want to start volumouse at startup, enter this command as app's directory :")
+                print("python3 '"+os.path.dirname(os.path.abspath(__file__))+"/volumouse.py'")
+                time.sleep(5)
+            #############################################
+            print("\nConfiguration completed, you can now run the command 'volumouse.py'")
+            print("Press any key to quit")
+            answer = input()
             exit(0)
 
 ############################FUNCTION
@@ -393,7 +453,6 @@ def main():
         f.close()
     except :
         Screen_resolution = (1920,1080)
-        
         print(Screen_resolution)
 
     def volume_up_top_right():
@@ -533,7 +592,6 @@ if __name__ == "__main__":
     # Catch all untrapped exceptions
     try:
         main()
-        exit(0)
     except Exception as error:
         print(error)
         exit(1)
