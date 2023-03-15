@@ -8,9 +8,6 @@ A Python 3 program that allows you to change the volume with the mouse wheel usi
 
 
 
-THIS IS THE PORTABLE VERSION FOR DIRECT DOWNLOADING. IT'S NOT AN INSTALLED PACKAGE. TO RUN THE APP JUST EXECUTE, IN YOUR IMPORTED FOLDER, `python3 volumouse.py -c`to configure and `python3 volumouse.py` to run the app . IF YOU WANT TO INSTALL THE PACKAGE USING PyPI (pip version) go there : [How to install volumouse with pip ?](https://github.com/pzim-devdata/volumouse#install-the-main-package-) or go directly to the [PyPI Project Website](https://pypi.org/project/volumouse/#description) It's easier.
-
-
 
 ![GifVolumouse.gif](GifVolumouse.gif)
 
