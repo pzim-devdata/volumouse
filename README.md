@@ -45,7 +45,7 @@ and
 
 It's very easy to configure, there are just a simple command to execute, once for all, the first time :
 
-All is explained in volumouse --help and volumouse --info
+All is explained in `volumouse.py --help` and `volumouse.py --info`
 
 Open a terminal in the directory of volumouse.py and type :
 
