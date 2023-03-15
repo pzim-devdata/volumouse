@@ -16,13 +16,13 @@ A Python 3 program that allows you to change the volume with the mouse wheel usi
 
 # Install dependancies :
 
-You will need x11-utils :
+- You will need x11-utils :
 Debian, Ubuntu, Kali Linux, Raspbian :`apt-get install x11-utils`
 Arch Linux :`pacman -S xorg-xdpyinfo`
 CentOS : `yum install xorg-x11-utils`
 Fedora : `dnf install xorg-x11-utils`
 
-You will also need pulseaudio-utils :
+- You will also need pulseaudio-utils :
 Debian, Ubuntu, Kali Linux, Raspbian : `apt-get install pulseaudio-utils`
 Alpine : `apk add pulseaudio-utils`
 Arch Linux : `pacman -S libpulse`
