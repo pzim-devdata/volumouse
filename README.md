@@ -45,7 +45,9 @@ All is explained in `python3 'volumouse.py' --help` and `python3 'volumouse.py' 
 
 Open a terminal in the directory of volumouse.py and type :
 
-- `python3 'volumouse.py' --configure` in the imported folder or `python3 '/place/of/the/folder/volumouse/volumouse.py' -c`
+- `python3 'volumouse.py' --configure` in the imported folder 
+or 
+- `python3 '/place/of/the/folder/volumouse/volumouse.py' -c`
 
 
 
