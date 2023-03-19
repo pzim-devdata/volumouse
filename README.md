@@ -39,7 +39,7 @@ and
 
 # Configure :
 
-It's very easy to configure, there are just a simple command to execute, once for all, the first time :
+It's very easy to configure, there is just a simple command to execute, once for all, the first time :
 
 All is explained in `python3 'volumouse.py' --help` and `python3 'volumouse.py' --info`
 
