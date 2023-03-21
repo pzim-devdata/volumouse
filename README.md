@@ -13,8 +13,10 @@ A Python 3 program that allows you to change the volume with the mouse wheel usi
 # Download the folder and extract it : 
 
 [Download :inbox_tray:](https://github.com/pzim-devdata/volumouse/releases/download/v0.0.1/volumouse.zip)
+
 [![no blinking/flickering TextProgressBar][2]][2]
  [2]: https://i.stack.imgur.com/mMy7Y.gif
+
 # Install dependancies :
 
 - You will need x11-utils :
