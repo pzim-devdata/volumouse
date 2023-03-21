@@ -37,8 +37,8 @@ Fedora : `dnf install pulseaudio-utils`
 
 Run in your imported folder : 
 
-- ~~ ~~`python3 -m pip install -r requirements.txt` in order to install dependencies~~ ~~
-~~ ~~and~~ ~~
+- ~~ ~~`python3 -m pip install -r requirements.txt` in order to install dependencies
+~~ ~~and
 - `python3 volumouse.py` for being sure that volumouse starts
 
 # Configure :
