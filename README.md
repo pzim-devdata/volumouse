@@ -5,7 +5,7 @@ A Python 3 program that allows you to change the volume with the mouse wheel usi
 [![GitHub license](https://img.shields.io/github/license/pzim-devdata/volumouse?style=plastic)](https://github.com/pzim-devdata/volumouse/blob/main/LICENSE)    ![](https://img.shields.io/badge/Works%20with-Python%203-red?style=plastic)    ![GitHub issues](https://img.shields.io/github/issues/pzim-devdata/volumouse?style=plastic)    [](https://github.com/pzim-devdata/volumouse/issues)    ![GitHub repo size](https://img.shields.io/github/repo-size/pzim-devdata/volumouse?style=plastic)    [![Visits Badge](https://badges.strrl.dev/visits/pzim-devdata/volumouse)](https://badges.strrl.dev)    ![GitHub release (latest by date)](https://img.shields.io/github/v/release/pzim-devdata/volumouse?style=plastic)    [![GitHub commits](https://img.shields.io/github/commits-since/pzim-devdata/volumouse/v0.0.1.svg?style=plastic)](https://GitHub.com/pzim-devata/volumouse/commit/)    ![GitHub All Releases](https://img.shields.io/github/downloads/pzim-devdata/volumouse/total?style=plastic)  
 
 
-
+IF YOU LIKE THIS PROGRAM, PLEASE GIVE ME A STAR :star:
 
 
 ![GifVolumouse.gif](GifVolumouse.gif)
