@@ -22,8 +22,15 @@ file_Top_right_card = os.path.dirname(os.path.abspath(__file__))+'/temp/top_righ
 file_Bottom_right_card = os.path.dirname(os.path.abspath(__file__))+'/temp/bottom_right_card.txt'
 file_Top_left_card = os.path.dirname(os.path.abspath(__file__))+'/temp/top_left_card.txt'
 file_Bottom_left_card = os.path.dirname(os.path.abspath(__file__))+'/temp/bottom_left_card.txt'
+
 file_Screen_resolution = os.path.dirname(os.path.abspath(__file__))+'/temp/screen_resolution.txt'
+
 file_Corner_area = os.path.dirname(os.path.abspath(__file__))+'/temp/corner_area_size.txt'
+
+file_max_volume_top_right = os.path.dirname(os.path.abspath(__file__))+'/temp/max_top_right_volume.txt'
+file_max_volume_bottom_right = os.path.dirname(os.path.abspath(__file__))+'/temp/max_bottom_right_volume.txt'
+file_max_volume_top_left = os.path.dirname(os.path.abspath(__file__))+'/temp/max_top_left_volume.txt'
+file_max_volume_bottom_left = os.path.dirname(os.path.abspath(__file__))+'/temp/max_bottom_left_volume.txt'
 
 def main():
     import __version__
@@ -304,6 +311,20 @@ def main():
                     f.write('')
                 f.close()
                 time.sleep(2)
+
+                print("\nWhat is the maximum volume you want for the 'Top Right' corner's side ? (Default is 150%).\nEnter a number without '%'...")
+                print('')
+                answer = input()
+                f = open(file_max_volume_top_right, 'w')
+                try :
+                    f.write(str(int(answer)))
+                except Exception as e:
+                    print( "\nDid you provided a number without '%' ? Max volume will be defined to 150%")
+                    f.write('150')
+                    print( "\nAn error occured, look at the error message bellow :\n")
+                    print(e)
+                f.close()
+                time.sleep(2)
             ####################
                 print("\nPlease enter the number of the card you want to use for the 'Bottom Right' corner's side of the screen :")
                 print("0- No Soundcard")
@@ -328,6 +349,20 @@ def main():
                 else:
                     print("\nYou didn't provided a card for the 'Bottom Right' corner's side of the screen.\nNo card will be assigned")
                     f.write('')
+                f.close()
+                time.sleep(2)
+
+                print("\nWhat is the maximum volume you want for the 'Bottom Right' corner's side ? (Default is 150%).\nEnter a number without '%'...")
+                print('')
+                answer = input()
+                f = open(file_max_volume_bottom_right, 'w')
+                try :
+                    f.write(str(int(answer)))
+                except Exception as e:
+                    print( "\nDid you provided a number without '%' ? Max volume will be defined to 150%")
+                    f.write('150')
+                    print( "\nAn error occured, look at the error message bellow :\n")
+                    print(e)
                 f.close()
                 time.sleep(2)
             ####################
@@ -356,6 +391,20 @@ def main():
                     f.write('')
                 f.close()
                 time.sleep(2)
+
+                print("\nWhat is the maximum volume you want for the 'Top Left' corner's side ? (Default is 150%).\nEnter a number without '%'...")
+                print('')
+                answer = input()
+                f = open(file_max_volume_top_left, 'w')
+                try :
+                    f.write(str(int(answer)))
+                except Exception as e:
+                    print( "\nDid you provided a number without '%' ? Max volume will be defined to 150%")
+                    f.write('150')
+                    print( "\nAn error occured, look at the error message bellow :\n")
+                    print(e)
+                f.close()
+                time.sleep(2)
             ####################
                 print("\nPlease enter the number of the card you want to use for the 'Bottom Left' corner's side of the screen :")
                 print("0- No Soundcard")
@@ -382,6 +431,21 @@ def main():
                     f.write('')
                 f.close()
                 time.sleep(2)
+
+                print("\nWhat is the maximum volume you want for the 'Bottom Left' corner's side ? (Default is 150%).\nEnter a number without '%'...")
+                print('')
+                answer = input()
+                f = open(file_max_volume_bottom_left, 'w')
+                try :
+                    f.write(str(int(answer)))
+                except Exception as e:
+                    print( "\nDid you provided a number without '%' ? Max volume will be defined to 150%")
+                    f.write('150')
+                    print( "\nAn error occured, look at the error message bellow :\n")
+                    print(e)
+                f.close()
+                time.sleep(2)
+
             except Exception as e:
                 print( "\nAn error occured, look at the error message bellow :\n")
                 print(e)
@@ -459,6 +523,31 @@ def main():
         Screen_resolution = (1920,1080)
         print(Screen_resolution)
 
+    try :
+        f = open(file_max_volume_top_right, 'r')
+        max_volume_top_right=int(f.read())
+        f.close()
+    except :
+        max_volume_top_right=int(150)
+    try :
+        f = open(file_max_volume_bottom_right, 'r')
+        max_volume_bottom_right=int(f.read())
+        f.close()
+    except :
+        max_volume_bottom_right=int(150)
+    try :
+        f = open(file_max_volume_top_left, 'r')
+        max_volume_top_left=int(f.read())
+        f.close()
+    except :
+        max_volume_top_left=int(150)
+    try :
+        f = open(file_max_volume_bottom_left, 'r')
+        max_volume_bottom_left=int(f.read())
+        f.close()
+    except :
+        max_volume_bottom_left=int(150)
+
     def volume_up_top_right():
         subprocess.run("pactl set-sink-volume "+Top_right_card+" +5% & pid=$!",shell=True)
         #######"IT COULD ALSO BE FOR EXEMPLE:
@@ -526,6 +615,9 @@ def main():
                        if event.detail == 4 : 
                           print ("volume up!")
                           volume_up_top_right() 
+                          if int(str(subprocess.check_output("pactl get-sink-volume "+Top_right_card+" | grep % | cut -d '/' -f2 | cut -d'%' -f1", shell=True).rstrip()).replace("b' ","").replace("'","")) > max_volume_top_right :
+                            print("Volume exceeded the maximum value : "+str(max_volume_top_right)+"% !")
+                            subprocess.run("pactl set-sink-volume "+Top_right_card+" "+str(max_volume_top_right)+"% & pid=$!",shell=True)
 
                        # event.detail 5 means wheel down event
 
@@ -542,6 +634,9 @@ def main():
                        if event.detail == 4 :
                           print ("volume up!")
                           volume_up_top_left()
+                          if int(str(subprocess.check_output("pactl get-sink-volume "+Top_left_card+" | grep % | cut -d '/' -f2 | cut -d'%' -f1", shell=True).rstrip()).replace("b' ","").replace("'","")) > 100 :
+                            print("Volume exceeded the maximum value : "+str(max_volume_top_left)+"% !")
+                            subprocess.run("pactl set-sink-volume "+Top_left_card+" "+str(max_volume_top_left)+"% & pid=$!",shell=True)
 
                        if event.detail == 5 :
                           print ("volume down!")
@@ -556,6 +651,9 @@ def main():
                        if event.detail == 4 :
                           print ("volume up!")
                           volume_up_bottom_right() 
+                          if int(str(subprocess.check_output("pactl get-sink-volume "+Bottom_right_card+" | grep % | cut -d '/' -f2 | cut -d'%' -f1", shell=True).rstrip()).replace("b' ","").replace("'","")) > 100 :
+                            print("Volume exceeded the maximum value : "+str(max_volume_bottom_right)+"% !")
+                            subprocess.run("pactl set-sink-volume "+Bottom_right_card+" "+str(max_volume_bottom_right)+"% & pid=$!",shell=True)
 
                        if event.detail == 5 :
                           print ("volume down!")
@@ -569,7 +667,10 @@ def main():
 
                        if event.detail == 4 :
                           print ("volume up!") 
-                          volume_up_bottom_left() 
+                          volume_up_bottom_left()
+                          if int(str(subprocess.check_output("pactl get-sink-volume "+Bottom_left_card+" | grep % | cut -d '/' -f2 | cut -d'%' -f1", shell=True).rstrip()).replace("b' ","").replace("'","")) > 100 :
+                            print("Volume exceeded the maximum value : "+str(max_volume_bottom_left)+"% !")
+                            subprocess.run("pactl set-sink-volume "+Bottom_left_card+" "+str(max_volume_bottom_left)+"% & pid=$!",shell=True) 
 
                        if event.detail == 5 :
                           print ("volume down!") 
