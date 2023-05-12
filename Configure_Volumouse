@@ -1,4 +1,3 @@
 #!/bin/bash
 
-gnome-terminal -- $(dirname "$0")/volumouse.py --config &
-
+gnome-terminal -- python3 $(dirname "$0")/volumouse.py --config &
