@@ -321,8 +321,8 @@ def main():
                 except Exception as e:
                     print( "\nDid you provided a number without '%' ? Max volume will be defined to 150%")
                     f.write('150')
-                    print( "\nAn error occured, look at the error message bellow :\n")
-                    print(e)
+#                    print( "\nAn error occured, look at the error message bellow :\n")
+#                    print(e)
                 f.close()
                 time.sleep(2)
             ####################
@@ -361,8 +361,8 @@ def main():
                 except Exception as e:
                     print( "\nDid you provided a number without '%' ? Max volume will be defined to 150%")
                     f.write('150')
-                    print( "\nAn error occured, look at the error message bellow :\n")
-                    print(e)
+#                    print( "\nAn error occured, look at the error message bellow :\n")
+#                    print(e)
                 f.close()
                 time.sleep(2)
             ####################
@@ -401,8 +401,8 @@ def main():
                 except Exception as e:
                     print( "\nDid you provided a number without '%' ? Max volume will be defined to 150%")
                     f.write('150')
-                    print( "\nAn error occured, look at the error message bellow :\n")
-                    print(e)
+#                    print( "\nAn error occured, look at the error message bellow :\n")
+#                    print(e)
                 f.close()
                 time.sleep(2)
             ####################
@@ -441,8 +441,8 @@ def main():
                 except Exception as e:
                     print( "\nDid you provided a number without '%' ? Max volume will be defined to 150%")
                     f.write('150')
-                    print( "\nAn error occured, look at the error message bellow :\n")
-                    print(e)
+#                    print( "\nAn error occured, look at the error message bellow :\n")
+#                    print(e)
                 f.close()
                 time.sleep(2)
 
