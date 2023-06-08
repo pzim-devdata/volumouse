@@ -15,7 +15,7 @@ IF YOU LIKE THIS PROGRAM, PLEASE GIVE ME A STAR :star:
 
 # Download the folder and extract it : 
 
-[Download :inbox_tray:](https://github.com/pzim-devdata/volumouse/releases/download/v0.0.1/volumouse.zip)
+[Download :inbox_tray:](https://github.com/pzim-devdata/volumouse/releases/latest/download/volumouse.zip)
 
 [![no blinking/flickering TextProgressBar][2]][2]
 
