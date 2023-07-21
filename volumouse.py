@@ -634,7 +634,7 @@ def main():
                        if event.detail == 4 :
                           print ("volume up!")
                           volume_up_top_left()
-                          if int(str(subprocess.check_output("pactl get-sink-volume "+Top_left_card+" | grep % | cut -d '/' -f2 | cut -d'%' -f1", shell=True).rstrip()).replace("b' ","").replace("'","")) > 100 :
+                          if int(str(subprocess.check_output("pactl get-sink-volume "+Top_left_card+" | grep % | cut -d '/' -f2 | cut -d'%' -f1", shell=True).rstrip()).replace("b' ","").replace("'","")) > max_volume_top_left :
                             print("Volume exceeded the maximum value : "+str(max_volume_top_left)+"% !")
                             subprocess.run("pactl set-sink-volume "+Top_left_card+" "+str(max_volume_top_left)+"% & pid=$!",shell=True)
 
@@ -651,7 +651,7 @@ def main():
                        if event.detail == 4 :
                           print ("volume up!")
                           volume_up_bottom_right() 
-                          if int(str(subprocess.check_output("pactl get-sink-volume "+Bottom_right_card+" | grep % | cut -d '/' -f2 | cut -d'%' -f1", shell=True).rstrip()).replace("b' ","").replace("'","")) > 100 :
+                          if int(str(subprocess.check_output("pactl get-sink-volume "+Bottom_right_card+" | grep % | cut -d '/' -f2 | cut -d'%' -f1", shell=True).rstrip()).replace("b' ","").replace("'","")) > max_volume_bottom_right :
                             print("Volume exceeded the maximum value : "+str(max_volume_bottom_right)+"% !")
                             subprocess.run("pactl set-sink-volume "+Bottom_right_card+" "+str(max_volume_bottom_right)+"% & pid=$!",shell=True)
 
@@ -668,7 +668,7 @@ def main():
                        if event.detail == 4 :
                           print ("volume up!") 
                           volume_up_bottom_left()
-                          if int(str(subprocess.check_output("pactl get-sink-volume "+Bottom_left_card+" | grep % | cut -d '/' -f2 | cut -d'%' -f1", shell=True).rstrip()).replace("b' ","").replace("'","")) > 100 :
+                          if int(str(subprocess.check_output("pactl get-sink-volume "+Bottom_left_card+" | grep % | cut -d '/' -f2 | cut -d'%' -f1", shell=True).rstrip()).replace("b' ","").replace("'","")) > max_volume_bottom_left :
                             print("Volume exceeded the maximum value : "+str(max_volume_bottom_left)+"% !")
                             subprocess.run("pactl set-sink-volume "+Bottom_left_card+" "+str(max_volume_bottom_left)+"% & pid=$!",shell=True) 
 
