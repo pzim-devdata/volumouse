@@ -456,7 +456,7 @@ def main():
                 answer = input()
                 if answer.lower() == 'yes' or answer.lower() == 'y' :
                     f = open(os.path.expanduser('~')+"/.config/autostart/volumouse.desktop", "w")
-                    f.write("[Desktop Entry]\nName=Volumouse\nGenericName=Controle the volume with the mouse wheel\nComment=Control the volume with the mouse wheel\nExec=python3 '"+__file__+"'\nIcon="+os.path.dirname(os.path.abspath(__file__))+"/icons/volumouse.png\nNoDisplay=false\nHidden=false\nTerminal=false\nType=Application\nVersion="+ str(__version__.__version__)+"\nCategories==AudioVideo;Audio;Utility\nX-GNOME-Autostart-enabled=true\nX-GNOME-Autostart-Delay=7")
+                    f.write("[Desktop Entry]\nName=Volumouse\nGenericName=Controle the volume with the mouse wheel\nComment=Control the volume with the mouse wheel\nExec=python3 '"+__file__+"'\nIcon="+os.path.dirname(os.path.abspath(__file__))+"/icons/volumouse.png\nNoDisplay=false\nHidden=false\nTerminal=false\nType=Application\nCategories==AudioVideo;Audio;Utility\nX-GNOME-Autostart-enabled=true\nX-GNOME-Autostart-Delay=7")
                     f.close()
                     print("An autostart entry has been created, reboot the computer and volumouse will start automatically ;-)\n")
                     time.sleep(3)
