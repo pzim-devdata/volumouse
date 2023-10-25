@@ -68,30 +68,6 @@ Just run the command `python3 'volumouse.py'` in the imported folder or `python3
 For working, you should add `python3 '/place/of/the/folder/volumouse/volumouse.py'` to the starting apps during the system's startup.
 
 
-# Create a PATH to volumouse :
-
-
-You should create a PATH for starting volumouse with the `volumouse` command. But it's not very usefull if you start volumouse during the system's startup.
-
-
-Indead, to be able to run volumouse directly in the terminal, without going to the source package, you should add the volumouse's folder to the PATH :
-
-On Linux, it can be permanently done by executing : `sudo gedit ~/.bashrc` and adding, at the end of the document, this line :
-
-`export PATH=$PATH:/place/of/the/folder/volumouse`
-
-
-
-If you want to temporarily test it before, you can just execute this command in the terminal : 
-
-`export PATH=$PATH:/place/of/the/folder/volumouse` 
-
-It will be restored on the next reboot.
-
-
-
-By doing this, instead of taping `python3 '/place/of/the/folder/volumouse/volumouse.py'`,
-you will be able to directly tape in the terminal : `volumouse`. Perhaps you should rename `volumouse.py` to `volumouse` for that.
 
 
 
