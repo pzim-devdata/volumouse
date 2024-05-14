@@ -17,6 +17,9 @@ from Xlib.ext import record
 from Xlib.protocol import rq
 import time
 
+step_for_top_right="5" #Default is "5". Must be >= 4 ! Define volume step of n% for each wheel movement. >5 : very fast increase level. <5 slow 
+step_for_top_left="5"
+
 file_temp =  os.path.dirname(os.path.abspath(__file__))+'/temp'
 file_Top_right_card = os.path.dirname(os.path.abspath(__file__))+'/temp/top_right_card.txt'
 file_Bottom_right_card = os.path.dirname(os.path.abspath(__file__))+'/temp/bottom_right_card.txt'
@@ -295,11 +298,14 @@ def main():
                     y=y+1
                 print('')
                 answer = input()
-                top_right_card = list_cards[int(answer)-2]
+                try:
+                    top_right_card = list_cards[int(answer)-2]
+                except:
+                    pass
                 f = open(file_Top_right_card, 'w')
                 if int(answer) == 0 :
                     print("\nYou don't have selected any card") 
-                    f.write('')
+                    f.write('no_soundcard')
                 elif int(answer) == 1 :
                     print("\nYou have selected the default used card") 
                     f.write('@DEFAULT_SINK@')
@@ -335,11 +341,14 @@ def main():
                     y=y+1
                 print(' ')
                 answer = input()
-                bottom_right_card = list_cards[int(answer)-2]
+                try:
+                    bottom_right_card = list_cards[int(answer)-2]
+                except:
+                    pass
                 f = open(file_Bottom_right_card, 'w')
                 if int(answer) == 0 :
                     print("\nYou don't have selected any card") 
-                    f.write('')
+                    f.write('no_soundcard')
                 elif int(answer) == 1 :
                     print("\n\nYou have selected the default used card") 
                     f.write('@DEFAULT_SINK@')
@@ -375,11 +384,14 @@ def main():
                     y=y+1
                 print('')
                 answer = input()
-                top_left_card = list_cards[int(answer)-2]
+                try:
+                    top_left_card = list_cards[int(answer)-2]
+                except:
+                    pass
                 f = open(file_Top_left_card, 'w')
                 if int(answer) == 0 :
                     print("\nYou don't have selected any card") 
-                    f.write('')
+                    f.write('no_soundcard')
                 elif int(answer) == 1 :
                     print("\nYou have selected the default used card") 
                     f.write('@DEFAULT_SINK@')
@@ -415,11 +427,14 @@ def main():
                     y=y+1
                 print('')
                 answer = input()
-                bottom_left_card = list_cards[int(answer)-2]
+                try:
+                    bottom_left_card = list_cards[int(answer)-2]
+                except:
+                    pass
                 f = open(file_Bottom_left_card, 'w')
                 if int(answer) == 0 :
                     print("\nYou don't have selected any card") 
-                    f.write('')
+                    f.write('no_soundcard')
                 elif int(answer) == 1 :
                     print("\nYou have selected the default used card") 
                     f.write('@DEFAULT_SINK@')
@@ -456,7 +471,7 @@ def main():
                 answer = input()
                 if answer.lower() == 'yes' or answer.lower() == 'y' :
                     f = open(os.path.expanduser('~')+"/.config/autostart/volumouse.desktop", "w")
-                    f.write("[Desktop Entry]\nName=Volumouse\nGenericName=Controle the volume with the mouse wheel\nComment=Control the volume with the mouse wheel\nExec=python3 '"+__file__+"'\nIcon="+os.path.dirname(os.path.abspath(__file__))+"/icons/volumouse.png\nNoDisplay=false\nHidden=false\nTerminal=false\nType=Application\nCategories==AudioVideo;Audio;Utility\nX-GNOME-Autostart-enabled=true\nX-GNOME-Autostart-Delay=7")
+                    f.write("[Desktop Entry]\nName=Volumouse\nGenericName=Controle the volume with the mouse wheel\nComment=Control the volume with the mouse wheel\nExec=python3 '"+__file__+"'\nIcon="+os.path.dirname(os.path.abspath(__file__))+"/icons/volumouse.png\nNoDisplay=false\nHidden=false\nTerminal=false\nType=Application\nVersion="+ str(__version__.__version__)+"\nCategories==AudioVideo;Audio;Utility\nX-GNOME-Autostart-enabled=true\nX-GNOME-Autostart-Delay=7")
                     f.close()
                     print("An autostart entry has been created, reboot the computer and volumouse will start automatically ;-)\n")
                     time.sleep(3)
@@ -549,33 +564,59 @@ def main():
         max_volume_bottom_left=int(150)
 
     def volume_up_top_right():
-        subprocess.run("pactl set-sink-volume "+Top_right_card+" +5% & pid=$!",shell=True)
-        #######"IT COULD ALSO BE FOR EXEMPLE:
-        #subprocess.run("pactl set-sink-volume alsa_output.pci-0000_01_00.1.hdmi-stereo-extra3 +5% & pid=$!",shell=True)
-        #subprocess.run("pactl set-sink-volume @DEFAULT_SINK@ +5% & pid=$!",shell=True)
-        #subprocess.run("amixer set Master 5%+ & pid=$!",shell=True)
-        #subprocess.run("pactl set-sink-volume 4 +5% & pid=$!",shell=True)
-        #subprocess.run("pacmd set-sink-volume 1 10 & pid=$!",shell=True)
-        #subprocess.run("amixer -q sset Master 3%+ & pid=$!",shell=True)
-
-        # use "& pid=$!" end of your command to prevent freezing python script if your command takes long time to process.
+        if str(Top_right_card) != 'no_soundcard':
+            subprocess.run("pactl set-sink-volume "+Top_right_card+" +"+str(step_for_top_right)+"% & pid=$!",shell=True)
+            #######"IT COULD ALSO BE FOR EXEMPLE:
+            #subprocess.run("pactl set-sink-volume alsa_output.pci-0000_01_00.1.hdmi-stereo-extra3 +5% & pid=$!",shell=True)
+            #subprocess.run("pactl set-sink-volume @DEFAULT_SINK@ +5% & pid=$!",shell=True)
+            #subprocess.run("amixer set Master 5%+ & pid=$!",shell=True)
+            #subprocess.run("pactl set-sink-volume 4 +5% & pid=$!",shell=True)
+            #subprocess.run("pacmd set-sink-volume 1 10 & pid=$!",shell=True)
+            #subprocess.run("amixer -q sset Master 3%+ & pid=$!",shell=True)
+            # use "& pid=$!" end of your command to prevent freezing python script if your command takes long time to process.
+        else:
+            print('No sound card configured for the top right corner !')
     def volume_down_top_right():
-        subprocess.run("pactl set-sink-volume "+Top_right_card+" -5% & pid=$!",shell=True)
+        if str(Top_right_card) != 'no_soundcard':
+            subprocess.run("pactl set-sink-volume "+Top_right_card+" -"+str(step_for_top_right)+"% & pid=$!",shell=True)
+        else:
+            print('No sound card configured for the top right corner !')
 
     def volume_up_bottom_right():
-        subprocess.run("pactl set-sink-volume "+Bottom_right_card+" +5% & pid=$!",shell=True)
+        if str(Bottom_right_card) != 'no_soundcard':
+            subprocess.run("pactl set-sink-volume "+Bottom_right_card+" +5% & pid=$!",shell=True)
+        else:
+            print('No sound card configured for the bottom right corner !')
+
     def volume_down_bottom_right():
-        subprocess.run("pactl set-sink-volume "+Bottom_right_card+" -5% & pid=$!",shell=True)
+        if str(Bottom_right_card) != 'no_soundcard':
+            subprocess.run("pactl set-sink-volume "+Bottom_right_card+" -5% & pid=$!",shell=True)
+        else:
+            print('No sound card configured for the bottom right corner !')
 
     def volume_up_top_left():
-        subprocess.run("pactl set-sink-volume "+Top_left_card+" +5% & pid=$!",shell=True)    
+        if str(Top_left_card) != 'no_soundcard':
+            subprocess.run("pactl set-sink-volume "+Top_left_card+" +"+str(step_for_top_left)+"% & pid=$!",shell=True)
+        else:
+            print('No sound card configured for the top left corner !')
+
     def volume_down_top_left():
-        subprocess.run("pactl set-sink-volume "+Top_left_card+" -5% & pid=$!",shell=True)
+        if str(Top_left_card) != 'no_soundcard':
+            subprocess.run("pactl set-sink-volume "+Top_left_card+" -"+str(step_for_top_left)+"% & pid=$!",shell=True)
+        else:
+            print('No sound card configured for the top left corner !')
 
     def volume_up_bottom_left():
-        subprocess.run("pactl set-sink-volume "+Bottom_left_card+" +5% & pid=$!",shell=True)    
+        if str(Bottom_left_card) != 'no_soundcard':
+            subprocess.run("pactl set-sink-volume "+Bottom_left_card+" +5% & pid=$!",shell=True)
+        else:
+            print('No sound card configured for the bottom left corner !')
+
     def volume_down_bottom_left():
-        subprocess.run("pactl set-sink-volume "+Bottom_left_card+" -5% & pid=$!",shell=True)
+        if str(Bottom_left_card) != 'no_soundcard':
+            subprocess.run("pactl set-sink-volume "+Bottom_left_card+" -5% & pid=$!",shell=True)
+        else:
+            print('No sound card configured for the bottom left corner !')
 
     try :
         record_dpy = display.Display()
@@ -602,7 +643,8 @@ def main():
                 event, data = rq.EventField(None).parse_binary_value(data, record_dpy.display, None, None)
                 
                 if event.type == X.ButtonPress:
-                    print (event.detail, event.root_x, event.root_y)
+#                    print (event.detail, event.root_x, event.root_y)
+                    pass
 
                     # Let's set up right up corner 
 
@@ -615,9 +657,10 @@ def main():
                        if event.detail == 4 : 
                           print ("volume up!")
                           volume_up_top_right() 
-                          if int(str(subprocess.check_output("pactl get-sink-volume "+Top_right_card+" | grep % | cut -d '/' -f2 | cut -d'%' -f1", shell=True).rstrip()).replace("b' ","").replace("'","")) > max_volume_top_right :
-                            print("Volume exceeded the maximum value : "+str(max_volume_top_right)+"% !")
-                            subprocess.run("pactl set-sink-volume "+Top_right_card+" "+str(max_volume_top_right)+"% & pid=$!",shell=True)
+                          if str(Top_right_card) != 'no_soundcard':
+                              if int(str(subprocess.check_output("pactl get-sink-volume "+Top_right_card+" | grep % | cut -d '/' -f2 | cut -d'%' -f1", shell=True).rstrip()).replace("b' ","").replace("'","")) > max_volume_top_right :
+                                print("Volume exceeded the maximum value : "+str(max_volume_top_right)+"% !")
+                                subprocess.run("pactl set-sink-volume "+Top_right_card+" "+str(max_volume_top_right)+"% & pid=$!",shell=True)
 
                        # event.detail 5 means wheel down event
 
@@ -634,9 +677,10 @@ def main():
                        if event.detail == 4 :
                           print ("volume up!")
                           volume_up_top_left()
-                          if int(str(subprocess.check_output("pactl get-sink-volume "+Top_left_card+" | grep % | cut -d '/' -f2 | cut -d'%' -f1", shell=True).rstrip()).replace("b' ","").replace("'","")) > max_volume_top_left :
-                            print("Volume exceeded the maximum value : "+str(max_volume_top_left)+"% !")
-                            subprocess.run("pactl set-sink-volume "+Top_left_card+" "+str(max_volume_top_left)+"% & pid=$!",shell=True)
+                          if str(Top_left_card) != 'no_soundcard':
+                              if int(str(subprocess.check_output("pactl get-sink-volume "+Top_left_card+" | grep % | cut -d '/' -f2 | cut -d'%' -f1", shell=True).rstrip()).replace("b' ","").replace("'","")) > max_volume_top_left :
+                                print("Volume exceeded the maximum value : "+str(max_volume_top_left)+"% !")
+                                subprocess.run("pactl set-sink-volume "+Top_left_card+" "+str(max_volume_top_left)+"% & pid=$!",shell=True)
 
                        if event.detail == 5 :
                           print ("volume down!")
@@ -651,9 +695,10 @@ def main():
                        if event.detail == 4 :
                           print ("volume up!")
                           volume_up_bottom_right() 
-                          if int(str(subprocess.check_output("pactl get-sink-volume "+Bottom_right_card+" | grep % | cut -d '/' -f2 | cut -d'%' -f1", shell=True).rstrip()).replace("b' ","").replace("'","")) > max_volume_bottom_right :
-                            print("Volume exceeded the maximum value : "+str(max_volume_bottom_right)+"% !")
-                            subprocess.run("pactl set-sink-volume "+Bottom_right_card+" "+str(max_volume_bottom_right)+"% & pid=$!",shell=True)
+                          if str(Bottom_right_card) != 'no_soundcard':
+                              if int(str(subprocess.check_output("pactl get-sink-volume "+Bottom_right_card+" | grep % | cut -d '/' -f2 | cut -d'%' -f1", shell=True).rstrip()).replace("b' ","").replace("'","")) > max_volume_bottom_right :
+                                print("Volume exceeded the maximum value : "+str(max_volume_bottom_right)+"% !")
+                                subprocess.run("pactl set-sink-volume "+Bottom_right_card+" "+str(max_volume_bottom_right)+"% & pid=$!",shell=True)
 
                        if event.detail == 5 :
                           print ("volume down!")
@@ -668,9 +713,10 @@ def main():
                        if event.detail == 4 :
                           print ("volume up!") 
                           volume_up_bottom_left()
-                          if int(str(subprocess.check_output("pactl get-sink-volume "+Bottom_left_card+" | grep % | cut -d '/' -f2 | cut -d'%' -f1", shell=True).rstrip()).replace("b' ","").replace("'","")) > max_volume_bottom_left :
-                            print("Volume exceeded the maximum value : "+str(max_volume_bottom_left)+"% !")
-                            subprocess.run("pactl set-sink-volume "+Bottom_left_card+" "+str(max_volume_bottom_left)+"% & pid=$!",shell=True) 
+                          if str(Bottom_left_card) != 'no_soundcard':
+                              if int(str(subprocess.check_output("pactl get-sink-volume "+Bottom_left_card+" | grep % | cut -d '/' -f2 | cut -d'%' -f1", shell=True).rstrip()).replace("b' ","").replace("'","")) > max_volume_bottom_left :
+                                print("Volume exceeded the maximum value : "+str(max_volume_bottom_left)+"% !")
+                                subprocess.run("pactl set-sink-volume "+Bottom_left_card+" "+str(max_volume_bottom_left)+"% & pid=$!",shell=True) 
 
                        if event.detail == 5 :
                           print ("volume down!") 
@@ -678,13 +724,11 @@ def main():
                                            
                     
                 elif event.type == X.ButtonRelease:
-
-                    print  (event.detail, event.root_x, event.root_y)
-                    
+#                    print (event.detail, event.root_x, event.root_y)
+                    pass
                 elif event.type == X.MotionNotify:
-
-                    print (event.root_x, event.root_y)
-                    
+#                    print (event.root_x, event.root_y)
+                    pass
 
         record_dpy.record_enable_context(ctx, record_callback)
     except Exception as error:
