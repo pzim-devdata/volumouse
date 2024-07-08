@@ -27,7 +27,7 @@ IF YOU LIKE THIS PROGRAM, PLEASE GIVE ME A STAR :star:
 Debian, Ubuntu, Kali Linux, Raspbian :`apt-get install x11-utils`
 Arch Linux :`pacman -S xorg-xdpyinfo`
 CentOS : `yum install xorg-x11-utils`
-Fedora : `dnf install xorg-x11-utils`
+Fedora : ~~`dnf install xorg-x11-utils`~~ `dnf install python3-xlib`
 
 - You will also need pulseaudio-utils :
 Debian, Ubuntu, Kali Linux, Raspbian : `apt-get install pulseaudio-utils`
