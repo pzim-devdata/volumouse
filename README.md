@@ -36,7 +36,7 @@ Arch Linux : `pacman -S libpulse`
 CentOS : `yum install pulseaudio-utils`
 Fedora : `dnf install pulseaudio-utils`
 
-- Install `python3-xlib`(if `x11-utils` did not installed python3-xlib (thanks to @Jammmmm) :
+- Install `python3-xlib`(if `x11-utils` did not installed `python3-xlib` (thanks to @Jammmmm) :
 Run in your imported folder : `python3 -m pip install -r requirements.txt`
 or `pip install python3-xlib` or `python3 -m pip install python3-xlib` or `apt install python3-xlib`
 
