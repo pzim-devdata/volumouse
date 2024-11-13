@@ -23,26 +23,24 @@ IF YOU LIKE THIS PROGRAM, PLEASE GIVE ME A STAR :star:
   
 # Install dependancies :
 
-- You will need x11-utils :
+- You will need `x11-utils` :
 Debian, Ubuntu, Kali Linux, Raspbian :`apt-get install x11-utils`
 Arch Linux :`pacman -S xorg-xdpyinfo`
 CentOS : `yum install xorg-x11-utils`
 Fedora : ~~`dnf install xorg-x11-utils`~~ `dnf install python3-xlib`
 
-- You will also need pulseaudio-utils :
+- You will also need `pulseaudio-utils` :
 Debian, Ubuntu, Kali Linux, Raspbian : `apt-get install pulseaudio-utils`
 Alpine : `apk add pulseaudio-utils`
 Arch Linux : `pacman -S libpulse`
 CentOS : `yum install pulseaudio-utils`
 Fedora : `dnf install pulseaudio-utils`
 
+- Install `python3-xlib`(if `x11-utils` did not installed python3-xlib (thanks to @Jammmmm) :
+Run in your imported folder : `python3 -m pip install -r requirements.txt`
+or `pip install python3-xlib` or `python3 -m pip install python3-xlib` or `apt install python3-xlib`
+
 # Start the app :
-
-Run in your imported folder : 
-
-- `python3 -m pip install -r requirements.txt` or `pip install python3-xlib` or `python3 -m pip install python3-xlib` or `apt install python3-xlib` in order to install dependencies if x11-utils did not installed python3-xlib (thanks to @Jammmmm)
-
-and
 
 - `python3 volumouse.py` for being sure that volumouse starts
 
